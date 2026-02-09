@@ -9,10 +9,9 @@
 html, body {
     scroll-behavior: smooth;
     width: 100%;
-    overflow-x: hidden;  /* prevent left/right gap */
+    overflow-x: hidden;
     background-color: #162a6b;
     color: aliceblue;
-    padding: 0 5px; /* small padding for mobile */
 }
 
 /* Navbar */
@@ -55,6 +54,20 @@ html, body {
     font-weight: bold;
 }
 
+/* Hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: #ffd700;
+    margin: 4px 0;
+}
+
 /* Hero / Slider */
 .hero {
     width: 100%;
@@ -69,7 +82,7 @@ html, body {
 .slider {
     width: 100%;
     max-width: 1200px;
-    aspect-ratio: 16/9;   /* maintain proportion */
+    aspect-ratio: 16/9;
     position: relative;
     overflow: hidden;
     border-radius: 10px;
@@ -89,7 +102,7 @@ html, body {
 .slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;  /* fills slider nicely */
+    object-fit: cover;
     display: block;
 }
 
@@ -175,64 +188,29 @@ footer {
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
-    .slider {
-        max-width: 90%;
-    }
-}
-
 @media (max-width: 768px) {
-    .slider {
-        aspect-ratio: 4/3;  /* taller for phones */
-    }
+    .slider { aspect-ratio: 4/3; }
+    .services-container { flex-direction: column; align-items: center; }
+    .service-card { width: 90%; max-width: 300px; }
+    .locations-container { flex-direction: column; gap: 20px; }
+    .location-box { width: 100%; }
+    .location-box iframe { height: 200px; }
 
-    .services-container {
+    /* Mobile menu */
+    .hamburger { display: flex; }
+    .nav-links {
+        position: fixed;
+        top: 65px;
+        right: -100%;
+        height: 100vh;
+        width: 200px;
+        background-color: #1e3a8a;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
+        padding: 20px;
+        transition: right 0.3s ease-in-out;
+        z-index: 99;
     }
-
-    .service-card {
-        width: 90%;
-        max-width: 300px;
-    }
-
-    .locations-container {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .location-box {
-        width: 100%;
-    }
-
-    .location-box iframe {
-        height: 200px;
-    }
-
-    .section h2 {
-        font-size: 1.5rem;
-    }
-
-    .section p {
-        font-size: 0.9rem;
-    }
-
-    .btn {
-        padding: 8px 16px;
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .slider {
-        aspect-ratio: 3/2;
-    }
-
-    .section h2 {
-        font-size: 1.3rem;
-    }
-
-    .section p {
-        font-size: 0.85rem;
-    }
+    .nav-links li { margin: 20px 0; }
+    .nav-links.active { right: 0; }
 }
