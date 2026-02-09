@@ -1,16 +1,17 @@
-// Hamburger menu toggle
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
+// Language toggle
+const langBtn = document.getElementById('langBtn');
+let isArabic = false;  // default: English
 
-hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-});
+langBtn.addEventListener('click', () => {
+    isArabic = !isArabic;
 
-// Close menu when clicking a link
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
+    // Update all elements with data-en / data-ar
+    document.querySelectorAll('[data-en][data-ar]').forEach(el => {
+        el.textContent = isArabic ? el.getAttribute('data-ar') : el.getAttribute('data-en');
     });
+
+    // Update button text
+    langBtn.textContent = isArabic ? 'English' : 'العربية';
 });
 
 // Simple slider auto
