@@ -1,47 +1,30 @@
-document.addEventListener('DOMContentLoaded', () => {
+// Hamburger menu toggle
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
 
-    // Hamburger menu toggle
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-
-    // Language switcher
-    const langBtn = document.getElementById('langBtn');
-    let isEnglish = true;
-
-    langBtn.addEventListener('click', () => {
-        const elements = document.querySelectorAll('[data-en]');
-
-        elements.forEach(el => {
-            el.textContent = isEnglish ? el.getAttribute('data-ar') : el.getAttribute('data-en');
-        });
-
-        // Switch page direction
-        document.body.dir = isEnglish ? 'rtl' : 'ltr';
-
-        // Switch button text
-        langBtn.textContent = isEnglish ? 'English' : 'العربية';
-
-        isEnglish = !isEnglish;
-    });
-
-    // Slider
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.style.display = i === index ? 'block' : 'none';
-        });
-    }
-
-    showSlide(currentSlide);
-
-    setInterval(() => {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-    }, 4000);
+hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
 });
+
+// Close menu when clicking a link
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+    });
+});
+
+// Simple slider auto
+let slides = document.querySelectorAll('.slide');
+let current = 0;
+
+function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[index].classList.add('active');
+}
+
+function nextSlide() {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+}
+
+setInterval(nextSlide, 4000);
